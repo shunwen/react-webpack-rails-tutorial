@@ -14,8 +14,4 @@ describe "Server Rendering" do
     html_nodes = Nokogiri::HTML(response.body)
     expect(html_nodes.css("div#SimpleCommentScreen-react-component-0").children.size).to eq(0)
   end
-
-  it "fails!" do
-    expect(0).to eq 1
-  end
 end
