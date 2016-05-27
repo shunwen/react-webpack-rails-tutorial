@@ -18,7 +18,7 @@ By Justin Gordon and the Shaka Code Team, [www.shakacode.com](http://www.shakaco
 - Check out the [react_on_rails gem](https://github.com/shakacode/react_on_rails) for easy webpack integration.
 - If you came to here from the blog article, this example project has evolved. See [merged pull requests](https://github.com/shakacode/react-webpack-rails-tutorial/pulls?utf8=%E2%9C%93&q=is%3Apr+is%3Amerged) and the [CHANGELOG.md](./CHANGELOG.md).
 
-An outdated full tutorial article behind of the motivation of this system can be found at: [Fast Rich Client Rails Development With Webpack and the ES6 Transpiler](http://www.railsonmaui.com/blog/2014/10/03/integrating-webpack-and-the-es6-transpiler-into-an-existing-rails-project/). Note, this source code repository is way ahead of the tutorial. 
+An outdated full tutorial article behind of the motivation of this system can be found at: [Fast Rich Client Rails Development With Webpack and the ES6 Transpiler](http://www.railsonmaui.com/blog/2014/10/03/integrating-webpack-and-the-es6-transpiler-into-an-existing-rails-project/). Note, this source code repository is way ahead of the tutorial.
 
 # NEWS
 We have not yet updated the `react_on_rails` gem generators for the following tasks. We're looking for help to migrate this, if you're interested in contributing to the project. *The tutorial* refers to this repo. The following changes have resulted in lots of differences for the webpack files and visual assets:
@@ -78,10 +78,10 @@ See package.json and Gemfile for versions
 1. `rake db:setup`
 1. `foreman start -f Procfile.hot`
   1. Open a browser tab to http://localhost:3000 for the Rails app example with HOT RELOADING
-  2. Try Hot Reloading steps below! 
+  2. Try Hot Reloading steps below!
 1.  `foreman start -f Procfile.express`
   1. Open a browser tab to http://localhost:4000 for the Hot Module Replacement Example just using an express server (no Rails involved). This is good for fast prototyping of React components. However, this setup is not as useful now that we have hot reloading working for Rails!
-  2. Try Hot Reloading steps below! 
+  2. Try Hot Reloading steps below!
 1. `foreman start -f Procfile.static`
   1. Open a browser tab to http://localhost:3000 for the Rails app example.
   2. When you make changes, you have to refresh the browser page.
@@ -95,7 +95,7 @@ See package.json and Gemfile for versions
 1. Run all linters and tests: `rake`
 1. See all npm commands: `npm run`
 1. Start all development processes: `foreman start -f Procfile.dev`
-1. Start all Rails only development processes: `foreman start -f Procfile.rails`
+1. Start all Rails only development processes: `foreman start -f Procfile.hot`
 1. Start development without Rails, using the Webpack Dev Server only: `npm start` (or `foreman start -f Procfile.express`)
 
 
@@ -113,7 +113,7 @@ We're now using Webpack for all Sass and JavaScript assets so we can do CSS Modu
 
 1. **Production Deployment**: See [assets.rake](lib/tasks/assets.rake) for we modify the Rails precompile task to deploy assets for production.
 1. **Development Mode**: Two flavors: Hot reloading assets (JavaScript & CSS) and Static loading.
-   1. **Hot Loading**: We modify the URL in [application.html.erb](app/views/layouts/application.html.erb) based on whether or not we're in production mode using the helpers `env_stylesheet_link_tag` and `env_javascript_include_tag`. *Development mode* uses the Webpack Dev server running on port 3500. Other modes (production/test) uses precompiled files. See `Procfile.hot`. `Procfile.dev` also starts this mode. Note, *you don't have to refresh a Rails web page to view changes to JavaScript or CSS*.
+   1. **Hot Loading**: We modify the URL in [application.html.erb](app/views/layouts/application.html.erb) based on whether or not we're in production mode using the helpers `env_stylesheet_link_tag` and `env_javascript_include_tag`. *Development mode* uses the Webpack Dev server running on port 3500. Other modes (production/test) use precompiled files. See `Procfile.hot`. `Procfile.dev` also starts this mode. Note, *you don't have to refresh a Rails web page to view changes to JavaScript or CSS*.
   2. **Static Loading**: This uses webpack to create physical files of the assets, both JavaScript and CSS. This is essentially what we had before we enabled *Hot Loading*. You have to *refresh* the page to see changes to JavaScript or CSS. See `Procfile.static`. It is important to note that tests will use the same statically generated files.
   3. Note, the following view helpers do the magic to make this work:
    ```erb
